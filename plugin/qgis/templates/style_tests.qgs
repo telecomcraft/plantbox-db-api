@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2025-09-01T19:07:18" saveUserFull="Eron Lloyd" saveUser="eronlloyd" version="3.42.1-Münster" projectname="">
+<qgis saveDateTime="2025-09-02T06:22:29" saveUserFull="Eron Lloyd" saveUser="eronlloyd" version="3.42.1-Münster" projectname="">
   <homePath path=""/>
   <title></title>
   <transaction mode="Disabled"/>
@@ -172,17 +172,12 @@
   </main-annotation-layer>
   <projectlayers>
     <maplayer autoRefreshMode="Disabled" simplifyLocal="1" geometry="Line" minScale="100000000" symbologyReferenceScale="-1" legendPlaceholderImage="" simplifyMaxScale="1" readOnly="0" wkbType="LineStringZM" refreshOnNotifyMessage="" simplifyAlgorithm="0" maxScale="0" hasScaleBasedVisibilityFlag="0" type="vector" simplifyDrawingHints="1" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyDrawingTol="1" labelsEnabled="0">
-      <extent>
-        <xmin>-1.72988304809225468</xmin>
-        <ymin>49.57756276036982968</ymin>
-        <xmax>37.42055279234532605</xmax>
-        <ymax>49.73149632199671544</ymax>
-      </extent>
+      <extent3D yMax="49.731502532958984" xMax="37.420558929443359" yMin="49.577556610107422" xMin="-1.729883074760437" zMax="0" zMin="0"/>
       <wgs84extent>
-        <xmin>-1.72988304809225468</xmin>
-        <ymin>49.57756276036982968</ymin>
-        <xmax>37.42055279234532605</xmax>
-        <ymax>49.73149632199671544</ymax>
+        <xmin>-1.72988307476043701</xmin>
+        <ymin>49.57755661010742188</ymin>
+        <xmax>37.42055892944335938</xmax>
+        <ymax>49.73150253295898438</ymax>
       </wgs84extent>
       <id>cables_0c2aa653_1d3b_4562_b267_a337632ded18</id>
       <datasource>../../data/sample_data.gpkg|layername=cables</datasource>
@@ -579,8 +574,8 @@
       <customproperties>
         <Option type="Map">
           <Option value="0" type="int" name="embeddedWidgets/count"/>
-          <Option type="invalid" name="variableNames"/>
-          <Option type="invalid" name="variableValues"/>
+          <Option name="variableNames"/>
+          <Option name="variableValues"/>
         </Option>
       </customproperties>
       <blendMode>0</blendMode>
