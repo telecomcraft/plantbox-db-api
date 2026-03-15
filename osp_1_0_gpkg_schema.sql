@@ -5,16 +5,6 @@ CREATE TABLE plant_assets (
 	PRIMARY KEY (asset_id)
 );
 
-CREATE TABLE enclosures (
-	asset_id VARCHAR NOT NULL, 
-	category VARCHAR, 
-	geom geometry(POINT,4326), 
-	PRIMARY KEY (asset_id), 
-	FOREIGN KEY(asset_id) REFERENCES plant_assets (asset_id)
-);
-
-CREATE INDEX idx_enclosures_geom ON enclosures USING gist (geom);
-
 CREATE TABLE cables (
 	asset_id VARCHAR NOT NULL, 
 	fiber_count INTEGER, 
@@ -23,5 +13,11 @@ CREATE TABLE cables (
 	FOREIGN KEY(asset_id) REFERENCES plant_assets (asset_id)
 );
 
-CREATE INDEX idx_cables_geom ON cables USING gist (geom);
+CREATE TABLE enclosures (
+	asset_id VARCHAR NOT NULL, 
+	category VARCHAR, 
+	geom geometry(POINT,4326), 
+	PRIMARY KEY (asset_id), 
+	FOREIGN KEY(asset_id) REFERENCES plant_assets (asset_id)
+);
 

@@ -5,7 +5,7 @@ from plantbox.database import Base
 from plantbox.models.plant import PlantAsset, Enclosure, Cable # Splice
 
 def export_ddl():
-    output_file = "osp_1_0_schema.sql"
+    output_file = "osp_1_0_postgis_schema.sql"
     
     with open(output_file, "w") as file:
         def dump_to_file(sql, *multiparams, **params):
