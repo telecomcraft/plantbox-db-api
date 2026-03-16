@@ -1,2 +1,12 @@
-.p[cod]
+# Environments
+.venv/
+venv/
+env/
+
+# Python cache
 __pycache__/
+*.pyc
+
+# Database files
+*.sqlite3
+*.gpkg

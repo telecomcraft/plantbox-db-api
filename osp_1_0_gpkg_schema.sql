@@ -1,48 +1,76 @@
-CREATE TABLE asset_statuses (
-	status_code VARCHAR NOT NULL, 
-	description VARCHAR, 
-	PRIMARY KEY (status_code)
-);
-
-CREATE TABLE cable_types (
-	type_code VARCHAR NOT NULL, 
-	description VARCHAR, 
-	diameter_mm FLOAT, 
-	PRIMARY KEY (type_code)
-);
-
-CREATE TABLE plant_assets (
-	asset_id BIGINT NOT NULL, 
-	uuid CHAR(32) NOT NULL, 
-	asset_type VARCHAR NOT NULL, 
-	status_code VARCHAR, 
-	PRIMARY KEY (asset_id), 
-	FOREIGN KEY(status_code) REFERENCES asset_statuses (status_code)
-);
-
 CREATE TABLE cables (
-	asset_id BIGINT NOT NULL, 
+	asset_id VARCHAR NOT NULL, 
+	status VARCHAR, 
+	cable_type VARCHAR, 
 	fiber_count INTEGER, 
-	type_code VARCHAR, 
 	geom geometry(LINESTRING,4326), 
-	PRIMARY KEY (asset_id), 
-	FOREIGN KEY(asset_id) REFERENCES plant_assets (asset_id), 
-	FOREIGN KEY(type_code) REFERENCES cable_types (type_code)
+	PRIMARY KEY (asset_id)
 );
 
 CREATE TABLE enclosures (
-	asset_id BIGINT NOT NULL, 
+	asset_id VARCHAR NOT NULL, 
+	status VARCHAR, 
 	category VARCHAR, 
 	geom geometry(POINT,4326), 
-	PRIMARY KEY (asset_id), 
-	FOREIGN KEY(asset_id) REFERENCES plant_assets (asset_id)
+	PRIMARY KEY (asset_id)
+);
+
+CREATE TABLE projects (
+	project_id VARCHAR NOT NULL, 
+	name VARCHAR NOT NULL, 
+	status VARCHAR, 
+	start_date DATE, 
+	PRIMARY KEY (project_id)
+);
+
+CREATE TABLE phases (
+	phase_id VARCHAR NOT NULL, 
+	project_id VARCHAR NOT NULL, 
+	name VARCHAR NOT NULL, 
+	sequence_order INTEGER NOT NULL, 
+	status VARCHAR, 
+	PRIMARY KEY (phase_id), 
+	FOREIGN KEY(project_id) REFERENCES projects (project_id)
 );
 
 CREATE TABLE splices (
-	splice_id BIGINT NOT NULL, 
-	enclosure_id BIGINT NOT NULL, 
+	splice_id VARCHAR NOT NULL, 
+	enclosure_id VARCHAR NOT NULL, 
+	status VARCHAR, 
 	loss_db FLOAT, 
 	PRIMARY KEY (splice_id), 
+	FOREIGN KEY(enclosure_id) REFERENCES enclosures (asset_id)
+);
+
+CREATE TABLE builds (
+	build_id VARCHAR NOT NULL, 
+	phase_id VARCHAR NOT NULL, 
+	name VARCHAR NOT NULL, 
+	work_type VARCHAR, 
+	status VARCHAR, 
+	PRIMARY KEY (build_id), 
+	FOREIGN KEY(phase_id) REFERENCES phases (phase_id)
+);
+
+CREATE TABLE build_cables (
+	build_id VARCHAR NOT NULL, 
+	cable_id VARCHAR NOT NULL, 
+	action_type VARCHAR NOT NULL, 
+	action_date DATETIME, 
+	notes VARCHAR, 
+	PRIMARY KEY (build_id, cable_id), 
+	FOREIGN KEY(build_id) REFERENCES builds (build_id), 
+	FOREIGN KEY(cable_id) REFERENCES cables (asset_id)
+);
+
+CREATE TABLE build_enclosures (
+	build_id VARCHAR NOT NULL, 
+	enclosure_id VARCHAR NOT NULL, 
+	action_type VARCHAR NOT NULL, 
+	action_date DATETIME, 
+	notes VARCHAR, 
+	PRIMARY KEY (build_id, enclosure_id), 
+	FOREIGN KEY(build_id) REFERENCES builds (build_id), 
 	FOREIGN KEY(enclosure_id) REFERENCES enclosures (asset_id)
 );
 
